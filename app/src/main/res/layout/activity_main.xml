@@ -27,8 +27,8 @@
         android:layout_height="85dp"
         android:layout_weight="1"
         android:text="locations"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="366dp" />
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="342dp" />
 
     <Button
         android:id="@+id/Mark"

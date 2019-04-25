@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.List;
 import java.util.ArrayList;
+import android.content.Intent;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -52,11 +53,22 @@ public class MainActivity extends AppCompatActivity {
             locations.setText(locationListToShow);
         });
 
+        final Button Mark = findViewById(R.id.Mark);
+        Mark.setOnClickListener(v -> {
+            Log.d(TAG, "mark locations on Google Map");
+            // Start the activity connect to the
+            // specified class
+            Intent i = new Intent(this, MapsActivity.class);
+            startActivity(i);
+        });
+
 
 
 
 
     }
+
+
 
 
 }
