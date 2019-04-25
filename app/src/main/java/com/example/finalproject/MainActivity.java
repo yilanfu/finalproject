@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.android.volley.Request;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView locations;
     private List<String> locationList = new ArrayList<>();
     private String locationListToShow = "";
+    public final static String EXTRA_MESSAGE = "com.example.finalproject.MESSAGE";
 
     //textinputlayout
 
@@ -54,19 +56,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final Button Mark = findViewById(R.id.Mark);
-        Mark.setOnClickListener(v -> {
-            Log.d(TAG, "mark locations on Google Map");
-            // Start the activity connect to the
-            // specified class
-            Intent i = new Intent(this, MapsActivity.class);
-            startActivity(i);
-        });
-
-
-
-
-
     }
+    public void sendMessage(View view) {
+        Intent startMapActivity = new Intent(this, MapsActivity.class);
+        startMapActivity.putExtra(EXTRA_MESSAGE, locationListToShow);
+    }
+
+
 
 
 

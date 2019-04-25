@@ -26,16 +26,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     LocationManager locationManager;
 
+    //???????????????????????????????????????????????????????????????????????/
+    Bundle extras = getIntent().getExtras();
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle extras) {    //????????????????????????????///
+        super.onCreate(extras);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -59,7 +65,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String temp = addressList.get(0).getCountryName();
                         String result = output + temp;
                         mMap.addMarker(new MarkerOptions().position(latLng).title(result));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
