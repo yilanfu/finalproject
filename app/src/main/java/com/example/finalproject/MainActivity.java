@@ -56,10 +56,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final Button Mark = findViewById(R.id.Mark);
-    }
-    public void sendMessage(View view) {
-        Intent startMapActivity = new Intent(this, MapsActivity.class);
-        startMapActivity.putExtra(EXTRA_MESSAGE, locationListToShow);
+        Mark.setOnClickListener(v -> {
+            Log.d(TAG, "mark locations on the map");
+            Intent startMapActivity = new Intent(this, MapsActivity.class);
+            startMapActivity.putExtra(EXTRA_MESSAGE, locationListToShow);
+        });
     }
 
 

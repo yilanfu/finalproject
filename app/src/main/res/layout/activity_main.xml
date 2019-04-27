@@ -35,7 +35,6 @@
         android:layout_width="100dp"
         android:layout_height="81dp"
         android:text="Mark"
-        android:androidonClick="sendMessage"
         tools:layout_editor_absoluteX="127dp"
         tools:layout_editor_absoluteY="504dp" />
 
@@ -48,3 +47,4 @@
         tools:layout_editor_absoluteY="202dp" />
 
 </android.support.constraint.ConstraintLayout>
+
