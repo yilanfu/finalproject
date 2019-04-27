@@ -30,8 +30,10 @@ public class MainActivity extends AppCompatActivity {
     private List<String> locationList = new ArrayList<>();
     private String locationListToShow = "";
     public final static String EXTRA_MESSAGE = "com.example.finalproject.MESSAGE";
+    private List<Double> lat = new ArrayList<Double>();
+    private List<Double> log = new ArrayList<Double>();
 
-    //textinputlayout
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         input.setOnClickListener(v -> {
             Log.d(TAG, "input location one by one");
             String location = inputLocations.getText().toString();
+
             locationList.add(location);
             for (int i = 0; i < locationList.size(); i++) {
                 locationListToShow = " " + locationList.get(i);
