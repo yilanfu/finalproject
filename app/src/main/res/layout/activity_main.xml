@@ -8,6 +8,7 @@
 
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="0dp"
@@ -25,26 +26,50 @@
         android:id="@+id/locations"
         android:layout_width="261dp"
         android:layout_height="85dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginRight="75dp"
+        android:layout_marginBottom="24dp"
         android:layout_weight="1"
         android:text="locations"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="342dp" />
+        app:layout_constraintBottom_toTopOf="@+id/Mark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input" />
 
     <Button
         android:id="@+id/Mark"
         android:layout_width="100dp"
         android:layout_height="81dp"
+        android:layout_marginStart="127dp"
+        android:layout_marginLeft="127dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="184dp"
+        android:layout_marginRight="184dp"
+        android:layout_marginBottom="146dp"
         android:text="Mark"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="504dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locations" />
 
     <Button
         android:id="@+id/input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="149dp"
+        android:layout_marginLeft="149dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="174dp"
+        android:layout_marginRight="174dp"
+        android:layout_marginBottom="16dp"
         android:text="input"
-        tools:layout_editor_absoluteX="149dp"
-        tools:layout_editor_absoluteY="202dp" />
+        app:layout_constraintBottom_toTopOf="@+id/locations"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
 </android.support.constraint.ConstraintLayout>
 

@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "mark locations on the map");
             Intent startMapActivity = new Intent(this, MapsActivity.class);
             startMapActivity.putExtra(EXTRA_MESSAGE, locationListToShow);
+            startActivity(startMapActivity);
         });
     }
 
