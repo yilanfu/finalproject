@@ -12,6 +12,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -29,9 +30,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView locations;
     private List<String> locationList = new ArrayList<>();
     private String locationListToShow = "";
-    public final static String EXTRA_MESSAGE = "com.example.finalproject.MESSAGE";
-    private List<Double> lat = new ArrayList<Double>();
-    private List<Double> log = new ArrayList<Double>();
+    //public final static String MESSAGE_LAT = "com.example.finalproject.lat";
+    private ArrayList<Double> latList = new ArrayList<>();
+    private ArrayList<Double> lngList = new ArrayList<>();
+    //private ArrayList<List<Integer>> latLng = new ArrayList<>();
 
 
 
@@ -50,19 +52,38 @@ public class MainActivity extends AppCompatActivity {
         input.setOnClickListener(v -> {
             Log.d(TAG, "input location one by one");
             String location = inputLocations.getText().toString();
-
             locationList.add(location);
             for (int i = 0; i < locationList.size(); i++) {
                 locationListToShow = " " + locationList.get(i);
             }
             locations.setText(locationListToShow);
+
+            String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "AIzaSyBCb13EAk46_yoo6SSjmJ-sm27xmqe514w";
+            StringRequest jsonObjectRequest = new StringRequest
+                     (Request.Method.GET, url,  new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            System.out.println(response);
+                            //System.out.println(lngList);
+                            JsonParser parser = new JsonParser();
+                            JsonObject jsonResult = parser.parse(response).getAsJsonObject();
+                            double lat = jsonResult.get("result").getAsJsonArray().getAsJsonObject().get("geometry").getAsJsonObject().get("location").getAsJsonObject().get("lat").getAsDouble();
+                            double lng = jsonResult.get("result").getAsJsonArray().getAsJsonObject().get("geometry").getAsJsonObject().get("location").getAsJsonObject().get("lng").getAsDouble();
+                            latList.add(0, lat);
+                            lngList.add(0, lng);
+                        }
+
+                    },null);
+            requestQueue.add(jsonObjectRequest);
+
         });
 
         final Button Mark = findViewById(R.id.Mark);
         Mark.setOnClickListener(v -> {
             Log.d(TAG, "mark locations on the map");
             Intent startMapActivity = new Intent(this, MapsActivity.class);
-            startMapActivity.putExtra(EXTRA_MESSAGE, locationListToShow);
+            startMapActivity.putExtra("latList", latList);
+            startMapActivity.putExtra("lngList", lngList);
             startActivity(startMapActivity);
         });
     }
