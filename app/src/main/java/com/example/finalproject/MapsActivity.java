@@ -16,6 +16,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
@@ -26,14 +27,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     LocationManager locationManager;
+    ArrayList<Double> latList;
+    ArrayList<Double> lngList;
 
 
     @Override
     protected void onCreate(Bundle extras) {    //????????????????????????????///
         super.onCreate(extras);
-        ArrayList<Double> latList = (ArrayList<Double>) getIntent().getSerializableExtra("latList");
-        ArrayList<Double> lngList = (ArrayList<Double>) getIntent().getSerializableExtra("lngList");
-        System.out.println("s");
+        latList = (ArrayList<Double>) getIntent().getSerializableExtra("latList");
+        lngList = (ArrayList<Double>) getIntent().getSerializableExtra("lngList");
+
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -53,26 +56,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
-                    for (int i = 0; i < latList.size(); i++) {
-                        double latitude = 40.2164962; //latList.get(i);
-                        double longitude = 116.7829835; //lngList.get(i);
-                        LatLng latLng = new LatLng(latitude, longitude);
-                        Geocoder geocoder = new Geocoder(getApplicationContext());
-                        try {
-                            List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
-                            String output = addressList.get(0).getLocality()+",";
-                            String temp = addressList.get(0).getCountryName();
-                            String result = output + temp;
-                            mMap.addMarker(new MarkerOptions().position(latLng).title(result));
-                            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
 
                 }
 
@@ -107,7 +95,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             String temp = addressList.get(0).getCountryName();
                             String result = output + temp;
                             mMap.addMarker(new MarkerOptions().position(latLng).title(result));
-                            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -131,8 +119,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             });
         }
-
-
     }
 
 
@@ -148,10 +134,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        for (int i = 0; i < latList.size(); i++) {
+            double latitude = latList.get(i);
+            double longitude = lngList.get(i);
+            LatLng latLng = new LatLng(latitude, longitude);
+            Geocoder geocoder = new Geocoder(getApplicationContext());
+            try {
+                List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
+                String output = addressList.get(0).getLocality()+",";
+                String temp = addressList.get(0).getCountryName();
+                String result = output + temp;
+                mMap.addMarker(new MarkerOptions().position(latLng).title(result));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
-        // Add a marker in Sydney and move the camera
-       // LatLng sydney = new LatLng(-34, 151);
-       // mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-       // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+        //Add a marker in Sydney and move the camera
+        //LatLng sydney = new LatLng(-34, 151);
+        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+       //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
     }
 }
