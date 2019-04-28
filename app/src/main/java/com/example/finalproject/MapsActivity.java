@@ -33,6 +33,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(extras);
         ArrayList<Double> latList = (ArrayList<Double>) getIntent().getSerializableExtra("latList");
         ArrayList<Double> lngList = (ArrayList<Double>) getIntent().getSerializableExtra("lngList");
+        System.out.println("s");
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -57,8 +58,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 @Override
                 public void onLocationChanged(Location location) {
                     for (int i = 0; i < latList.size(); i++) {
-                        double latitude = latList.get(i);
-                        double longitude = lngList.get(i);
+                        double latitude = 40.2164962; //latList.get(i);
+                        double longitude = 116.7829835; //lngList.get(i);
                         LatLng latLng = new LatLng(latitude, longitude);
                         Geocoder geocoder = new Geocoder(getApplicationContext());
                         try {
@@ -96,8 +97,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 @Override
                 public void onLocationChanged(Location location) {
                     for (int i = 0; i < latList.size(); i++) {
-                        double latitude = latList.get(i);
-                        double longitude = lngList.get(i);
+                        double latitude = 40.2164962; //latList.get(i);
+                        double longitude = 116.7829835; //lngList.get(i);
                         LatLng latLng = new LatLng(latitude, longitude);
                         Geocoder geocoder = new Geocoder(getApplicationContext());
                         try {

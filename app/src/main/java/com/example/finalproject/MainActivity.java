@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
             locations.setText(locationListToShow);
 
-            String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "AIzaSyBCb13EAk46_yoo6SSjmJ-sm27xmqe514w";
+            String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=AIzaSyBCb13EAk46_yoo6SSjmJ-sm27xmqe514w";
             StringRequest jsonObjectRequest = new StringRequest
                      (Request.Method.GET, url,  new Response.Listener<String>() {
                         @Override
@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
                             //System.out.println(lngList);
                             JsonParser parser = new JsonParser();
                             JsonObject jsonResult = parser.parse(response).getAsJsonObject();
-                            double lat = jsonResult.get("result").getAsJsonArray().getAsJsonObject().get("geometry").getAsJsonObject().get("location").getAsJsonObject().get("lat").getAsDouble();
-                            double lng = jsonResult.get("result").getAsJsonArray().getAsJsonObject().get("geometry").getAsJsonObject().get("location").getAsJsonObject().get("lng").getAsDouble();
+                            double lat = jsonResult.get("results").getAsJsonArray().get(0).getAsJsonObject().get("geometry").getAsJsonObject().get("location").getAsJsonObject().get("lat").getAsDouble();
+                            double lng = jsonResult.get("results").getAsJsonArray().get(0).getAsJsonObject().get("geometry").getAsJsonObject().get("location").getAsJsonObject().get("lng").getAsDouble();
                             latList.add(0, lat);
                             lngList.add(0, lng);
                         }
