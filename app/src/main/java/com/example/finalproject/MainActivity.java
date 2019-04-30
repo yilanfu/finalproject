@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < locationList.size(); i++) {
                 locationListToShow += " " + locationList.get(i);
                 locations.setText(locationListToShow);
+                locationList = new ArrayList<>();
             }
 
 
