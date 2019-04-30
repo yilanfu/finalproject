@@ -54,9 +54,10 @@ public class MainActivity extends AppCompatActivity {
             String location = inputLocations.getText().toString();
             locationList.add(location);
             for (int i = 0; i < locationList.size(); i++) {
-                locationListToShow = " " + locationList.get(i);
+                locationListToShow += " " + locationList.get(i);
+                locations.setText(locationListToShow);
             }
-            locations.setText(locationListToShow);
+
 
             String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=AIzaSyBCb13EAk46_yoo6SSjmJ-sm27xmqe514w";
             StringRequest jsonObjectRequest = new StringRequest
